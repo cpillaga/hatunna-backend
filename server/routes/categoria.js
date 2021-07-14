@@ -74,6 +74,7 @@ app.post('/categoria', (req, res) => {
             });
         }
 
+
         if (!categoriaBD) {
             return res.status(400).json({
                 ok: false,
