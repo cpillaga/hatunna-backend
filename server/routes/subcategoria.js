@@ -11,8 +11,9 @@ app.use(cors({ origin: '*' }));
 //mostrar todas las categorias
 //=====================================
 
-app.get('/subcategoria', (req, res) => {
-    SubCategoria.find({})
+app.get('/subcategoria/:idCategoria', (req, res) => {
+    let id = req.params.idCategoria;
+    SubCategoria.find({ categoria: id })
         .sort('descripcion')
         .exec((err, subcategoria) => {
             if (err) {
@@ -65,7 +66,8 @@ app.post('/subcategoria', (req, res) => {
     let body = req.body;
 
     let subcategoria = new SubCategoria({
-        descripcion: body.descripcion
+        descripcion: body.descripcion,
+        cateoria: body.categoria
     });
 
     subcategoria.save((err, subcategoriaBD) => {
