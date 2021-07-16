@@ -23,7 +23,7 @@ let productoSchema = new Schema({
         type: String,
         required: [true, 'La unidad de medida es necesaria'],
     },
-    subCategoria: {
+    subcategoria: {
         type: Schema.Types.ObjectId,
         ref: 'SubCategoria',
         required: true
