@@ -67,7 +67,7 @@ app.post('/subcategoria', (req, res) => {
 
     let subcategoria = new SubCategoria({
         descripcion: body.descripcion,
-        cateoria: body.categoria
+        categoria: body.categoria
     });
 
     subcategoria.save((err, subcategoriaBD) => {
