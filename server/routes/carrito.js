@@ -5,6 +5,7 @@ const cors = require('cors');
 
 let app = express();
 
+
 let Carrito = require("../models/carrito");
 app.use(cors({ origin: '*' }));
 
