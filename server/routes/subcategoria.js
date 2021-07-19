@@ -30,7 +30,7 @@ app.get('/subcategoria', (req, res) => {
         })
 });
 
-app.get('/subcategoria/:idCategoria', (req, res) => {
+app.get('/subcategoria/cat/:idCategoria', (req, res) => {
     let id = req.params.idCategoria;
     SubCategoria.find({ categoria: id })
         .sort('descripcion')
@@ -52,7 +52,7 @@ app.get('/subcategoria/:idCategoria', (req, res) => {
 //mostrar una categoria por id.
 //=====================================
 
-app.get('/subcategoria/:id', (req, res) => {
+app.get('/subcategoria/id/:id', (req, res) => {
     let id = req.params.id;
 
     SubCategoria.findById(id, (err, subcategoriaDB) => {
