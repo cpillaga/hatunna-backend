@@ -13,7 +13,7 @@ app.use(cors({ origin: '*' }));
 
 app.get('/subcategoria', (req, res) => {
     let id = req.params.idCategoria;
-    SubCategoria.find({ categoria: id })
+    SubCategoria.find({})
         .populate('categoria')
         .sort('descripcion')
         .exec((err, subcategoria) => {
