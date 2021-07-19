@@ -11,6 +11,25 @@ app.use(cors({ origin: '*' }));
 //mostrar todas las categorias
 //=====================================
 
+app.get('/subcategoria', (req, res) => {
+    let id = req.params.idCategoria;
+    SubCategoria.find({ categoria: id })
+        .populate('categoria')
+        .sort('descripcion')
+        .exec((err, subcategoria) => {
+            if (err) {
+                return res.status(500).json({
+                    ok: false,
+                    err
+                });
+            }
+            res.json({
+                ok: true,
+                subcategoria
+            })
+        })
+});
+
 app.get('/subcategoria/:idCategoria', (req, res) => {
     let id = req.params.idCategoria;
     SubCategoria.find({ categoria: id })
