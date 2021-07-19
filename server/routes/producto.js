@@ -16,7 +16,13 @@ app.get("/productos", (req, res) => {
     let desde = req.query.desde || 0;
     desde = Number(desde);
     Producto.find()
-        .populate('subcategoria', 'descripcion')
+        .populate('subcategoria')
+        .populate({
+            path: 'subcategoria',
+            populate: {
+                path: 'categoria'
+            }
+        })
         .populate('proveedor', 'razonSoc')
         .exec((err, productos) => {
             if (err) {
