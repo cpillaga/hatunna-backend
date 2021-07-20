@@ -37,15 +37,12 @@ app.get("/productos", (req, res) => {
             });
         });
 });
-app.get("/productos-categoria/:id", (req, res) => {
+app.get("/productos-subcategoria/:id", (req, res) => {
     //traer todos los productos
     let id = req.params.id;
 
-
-    let desde = req.query.desde || 0;
-    desde = Number(desde);
     Producto.find({
-            categoria: id
+            subcategoria: id
         })
         .populate('subcategoria')
         .populate({
