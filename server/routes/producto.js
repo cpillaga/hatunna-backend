@@ -47,7 +47,13 @@ app.get("/productos-categoria/:id", (req, res) => {
     Producto.find({
             categoria: id
         })
-        .populate('subcategoria', 'descripcion')
+        .populate('subcategoria')
+        .populate({
+            path: 'subcategoria',
+            populate: {
+                path: 'categoria'
+            }
+        })
         .populate('proveedor', 'razonSoc')
         .exec((err, productos) => {
             if (err) {
@@ -70,7 +76,13 @@ app.get("/productos-categoria/:id", (req, res) => {
 app.get("/productos/:id", (req, res) => {
     let id = req.params.id;
     Producto.findById(id)
-        .populate('subcategoria', 'descripcion')
+        .populate('subcategoria')
+        .populate({
+            path: 'subcategoria',
+            populate: {
+                path: 'categoria'
+            }
+        })
         .populate('proveedor', 'razonSoc')
         .exec((err, productoDB) => {
             if (err) {
@@ -219,7 +231,13 @@ app.get("/productos/buscar/:termino", (req, res) => {
             nombre: regex,
         })
         .sort("nombre")
-        .populate('subcategoria', 'descripcion')
+        .populate('subcategoria')
+        .populate({
+            path: 'subcategoria',
+            populate: {
+                path: 'categoria'
+            }
+        })
         .populate('proveedor', 'razonSoc')
         .exec((err, productos) => {
             if (err) {
