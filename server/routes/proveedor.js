@@ -173,7 +173,7 @@ app.get('/proveedor/buscar/:termino', (req, res) => {
     let regex = new RegExp(termino, 'i');
 
     Proveedor.find({
-            descripcion: regex
+            razonSoc: regex
         })
         .sort('razonSoc')
         .exec((err, proveedor) => {
