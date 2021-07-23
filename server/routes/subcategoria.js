@@ -119,7 +119,8 @@ app.put('/subcategoria/:id', (req, res) => {
     let body = req.body;
 
     let descCategoria = {
-        descripcion: body.descripcion
+        descripcion: body.descripcion,
+        categoria: body.categoria
     };
 
     SubCategoria.findByIdAndUpdate(id, descCategoria, {
