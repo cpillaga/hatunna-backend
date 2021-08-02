@@ -7,8 +7,6 @@ const bodyParser = require("body-parser");
 
 const app = express();
 
-let server = http.createServer(app);
-
 app.use(function(req, res, next) {
 
     res.header("Access-Control-Allow-Origin", "YOUR-DOMAIN.TLD"); // update to match the domain you will make the request from
@@ -43,6 +41,6 @@ mongoose.connect(
     }
 );
 
-server.listen(process.env.PORT, () =>
+app.listen(process.env.PORT, () =>
     console.log("Escuchando puerto:", process.env.PORT)
 );
