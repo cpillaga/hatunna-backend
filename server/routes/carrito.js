@@ -24,7 +24,7 @@ app.get("/carritos-usuario/:id", (req, res) => {
         .populate({
             path: 'producto',
             populate: {
-                path: 'categoria'
+                path: 'subcategoria'
             }
         }).populate('usuario')
         .exec((err, carritos) => {
@@ -51,7 +51,7 @@ app.get("/carritos/:id", (req, res) => {
         .populate({
             path: 'producto',
             populate: {
-                path: 'categoria'
+                path: 'subcategoria'
             }
         })
         .exec((err, carritoDB) => {
@@ -254,7 +254,7 @@ app.get("/carritos/buscar/:termino&:id", (req, res) => {
         }).populate({
             path: 'producto',
             populate: {
-                path: 'categoria'
+                path: 'subcategoria'
             }
         }).populate('usuario')
         .exec((err, productos) => {
