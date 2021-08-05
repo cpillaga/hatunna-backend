@@ -245,9 +245,10 @@ app.delete("/carritos/buscar/:id", (req, res) => {
 // Buscar un carrito x producto
 // =====================================
 
-app.get("/carritos/buscar/:termino&:id", (req, res) => {
+app.get("/carritos/buscar/:termino/:id", (req, res) => {
     let termino = req.params.termino;
     let id = req.params.id;
+
     Carrito.find({
             'producto': termino,
             'usuario': id,
