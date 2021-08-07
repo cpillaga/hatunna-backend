@@ -116,8 +116,8 @@ app.post("/productos", (req, res) => {
         descripcion: body.descripcion,
         unidadMedida: body.unidadMedida,
         img: body.img,
-        subcategoria: ObjectID(body.subcategoria),
-        proveedor: ObjectID(body.proveedor),
+        subcategoria: body.subcategoria,
+        proveedor: body.proveedor,
         stock: body.stock
     });
 
@@ -170,8 +170,8 @@ app.put("/productos/:id", (req, res) => {
             productoBD.unidadMedida = body.unidadMedida;
             productoBD.stock = body.stock;
             (productoBD.img = body.img),
-            (productoBD.subcategoria = ObjectID(body.subcategoria)),
-            (productoBD.proveedor = ObjectID(body.proveedor)),
+            (productoBD.subcategoria = body.subcategoria),
+            (productoBD.proveedor = body.proveedor),
             productoBD.save((err, productoGuardado) => {
                 if (err) {
                     return res.status(500).json({
