@@ -1,6 +1,6 @@
 const express = require("express");
 
-const mongoose = require("mongoose");
+var ObjectId = require('mongodb').ObjectID;
 const cors = require('cors');
 let app = express();
 app.use(cors({ origin: '*' }));
@@ -116,8 +116,8 @@ app.post("/productos", (req, res) => {
         descripcion: body.descripcion,
         unidadMedida: body.unidadMedida,
         img: body.img,
-        subcategoria: mongoose.Types.ObjectId(body.subcategoria),
-        proveedor: mongoose.Types.ObjectId(body.proveedor),
+        subcategoria: ObjectID(body.subcategoria),
+        proveedor: ObjectID(body.proveedor),
         stock: body.stock
     });
 
@@ -170,8 +170,8 @@ app.put("/productos/:id", (req, res) => {
             productoBD.unidadMedida = body.unidadMedida;
             productoBD.stock = body.stock;
             (productoBD.img = body.img),
-            (productoBD.subcategoria = mongoose.Types.ObjectId(body.subcategoria)),
-            (productoBD.proveedor = mongoose.Types.ObjectId(body.proveedor)),
+            (productoBD.subcategoria = ObjectID(body.subcategoria)),
+            (productoBD.proveedor = ObjectID(body.proveedor)),
             productoBD.save((err, productoGuardado) => {
                 if (err) {
                     return res.status(500).json({
