@@ -115,8 +115,8 @@ app.post("/productos", (req, res) => {
         descripcion: body.descripcion,
         unidadMedida: body.unidadMedida,
         img: body.img,
-        subcategoria: body.subcategoria,
-        proveedor: body.proveedor,
+        subcategoria: mongoose.Types.ObjectId(body.subcategoria),
+        proveedor: mongoose.Types.ObjectId(body.proveedor),
         stock: body.stock
     });
 
@@ -169,8 +169,8 @@ app.put("/productos/:id", (req, res) => {
             productoBD.unidadMedida = body.unidadMedida;
             productoBD.stock = body.stock;
             (productoBD.img = body.img),
-            (productoBD.subcategoria = body.subcategoria),
-            (productoBD.proveedor = body.proveedor),
+            (productoBD.subcategoria = mongoose.Types.ObjectId(body.subcategoria)),
+            (productoBD.proveedor = mongoose.Types.ObjectId(body.proveedor)),
             productoBD.save((err, productoGuardado) => {
                 if (err) {
                     return res.status(500).json({
