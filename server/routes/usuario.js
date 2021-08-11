@@ -67,7 +67,7 @@ app.post("/usuarios", (req, res) => {
     let body = req.body;
     let usuario;
 
-    if (body.facebook === true) {
+    if (body.facebook === 'true') {
         usuario = new Usuario({
             nombre: body.nombre,
             correo: body.correo,
