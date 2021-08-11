@@ -111,7 +111,7 @@ app.get("/usuarios/buscar/:termino", (req, res) => {
                 err,
             });
         }
-        if (usuarios.length <= 0) {
+        if (!usuarios) {
             return res.status(400).json({
                 ok: false,
                 err: {
