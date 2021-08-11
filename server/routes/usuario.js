@@ -65,13 +65,22 @@ app.get("/usuarios/:id", (req, res) => {
 
 app.post("/usuarios", (req, res) => {
     let body = req.body;
+    let usuario;
 
-    let usuario = new Usuario({
-        nombre: body.nombre,
-        correo: body.correo,
-        password: bcrypt.hashSync(body.password, 10),
-        facebook: body.facebook,
-    });
+    if (body.facebook == true) {
+        usuario = new Usuario({
+            nombre: body.nombre,
+            correo: body.correo,
+            facebook: body.facebook
+        });
+    } else {
+        usuario = new Usuario({
+            nombre: body.nombre,
+            correo: body.correo,
+            facebook: body.facebook,
+            password: bcrypt.hashSync(password, 10)
+        });
+    }
 
     usuario.save((err, usuarioBD) => {
         if (err) {
