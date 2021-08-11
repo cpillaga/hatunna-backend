@@ -15,7 +15,7 @@ let usuarioSchema = new Schema({
     },
     password: {
         type: String,
-        required: [true, 'La contraseña es necesaria'],
+        required: false
     },
     facebook: {
         type: Boolean,
