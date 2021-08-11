@@ -102,7 +102,7 @@ app.post("/usuarios", (req, res) => {
 
 app.get("/usuarios/buscar/:termino", (req, res) => {
     let termino = req.params.termino;
-    Usuario.find({
+    Usuario.findOne({
         correo: termino,
     }).exec((err, usuarios) => {
         if (err) {
