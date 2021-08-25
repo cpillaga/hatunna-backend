@@ -287,7 +287,9 @@ app.get("/carritos-suma/:id", (req, res) => {
             $group: {
                 _id: {},
                 total: {
-                    $sum: ["$subtotal"] 
+                    $sum: {
+                        $multiply: ["$subtotal", 1]
+                    }
                 }
             }
         }
