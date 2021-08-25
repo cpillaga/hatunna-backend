@@ -20,7 +20,10 @@ let usuarioSchema = new Schema({
     facebook: {
         type: Boolean,
         default: false,
-    }
+    },
+    fcm: [{
+        type: String
+    }]
 });
 
 // usuarioSchema.methods.toJSON = function() {

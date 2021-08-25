@@ -2,9 +2,7 @@ const express = require("express");
 const mongoose = require('mongoose');
 const cors = require('cors');
 
-
 let app = express();
-
 
 let Carrito = require("../models/carrito");
 app.use(cors({ origin: '*' }));
@@ -79,7 +77,6 @@ app.get("/carritos/:id", (req, res) => {
 //=====================================
 //crear un nuevo carrito
 //=====================================
-
 app.post("/carritos", (req, res) => {
     let body = req.body;
     let carrito = new Carrito({
@@ -278,7 +275,7 @@ app.get("/carritos/buscar/:termino/:id", (req, res) => {
 
 app.get("/carritos-suma/:id", (req, res) => {
     let id = req.params.id;
-    console.log(res.json);
+    
     Carrito.aggregate([{
             $match: {
                 "usuario": {
@@ -290,9 +287,7 @@ app.get("/carritos-suma/:id", (req, res) => {
             $group: {
                 _id: {},
                 total: {
-                    $sum: {
-                        $multiply: ["$subtotal", "$cantidad"]
-                    }
+                    $sum: ["$subtotal"] 
                 }
             }
         }
@@ -303,6 +298,7 @@ app.get("/carritos-suma/:id", (req, res) => {
                 err,
             });
         }
+
         res.json({
             ok: true,
             total,

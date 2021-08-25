@@ -5,24 +5,23 @@ const cors = require('cors');
 let app = express();
 app.use(cors({ origin: '*' }));
 
-let PedidoDetalle = require("../models/pedido-detalle");
+let DetalleSolicitud = require("../models/detalleSolicitud");
 
 //=======================================
 //mostrar todos los detalles de un pedido
 //=======================================
-
-app.get("/pedidos-detalle/:id", (req, res) => {
+app.get("/detalleSolicitud/:id", (req, res) => {
     let id = req.params.id;
-    PedidoDetalle.find({
-            pedido: id
-        })
+
+    DetalleSolicitud.find({ solicitud: id })
         .populate({
             path: 'producto',
             populate: {
                 path: 'categoria'
             }
-        }).populate('pedido')
-        .exec((err, pedidosDetalle) => {
+        })
+        .populate('pedido')
+        .exec((err, detalleSolicitud) => {
             if (err) {
                 return res.status(500).json({
                     ok: false,
@@ -31,7 +30,7 @@ app.get("/pedidos-detalle/:id", (req, res) => {
             }
             res.json({
                 ok: true,
-                pedidosDetalle,
+                detalleSolicitud,
             });
         });
 });
@@ -40,17 +39,16 @@ app.get("/pedidos-detalle/:id", (req, res) => {
 //=====================================
 //crear un nuevo pedido detalle
 //=====================================
-
-app.post("/pedidos-detalle", (req, res) => {
+app.post("/detalleSolicitud", (req, res) => {
     let body = req.body;
-    let pedido = new PedidoDetalle({
+    let detalleSolicitud = new DetalleSolicitud({
         cantidad: body.cantidad,
         producto: body.producto,
         subtotal: body.subtotal,
-        pedido: body.pedido,
+        solicitud: body.solicitud,
     });
 
-    pedido.save((err, pedidoBD) => {
+    detalleSolicitud.save((err, detalleSolicitudBD) => {
         if (err) {
             return res.status(500).json({
                 ok: false,
@@ -59,10 +57,9 @@ app.post("/pedidos-detalle", (req, res) => {
         }
         res.status(201).json({
             ok: true,
-            pedido: pedidoBD,
+            detalleSolicitud: detalleSolicitudBD,
         });
     });
 });
-
 
 module.exports = app;
