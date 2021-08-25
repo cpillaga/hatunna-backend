@@ -71,6 +71,7 @@ app.post("/usuarios", (req, res) => {
         usuario = new Usuario({
             nombre: body.nombre,
             correo: body.correo,
+            tipo: body.tipo,
             facebook: body.facebook
         });
     } else {
@@ -78,6 +79,7 @@ app.post("/usuarios", (req, res) => {
             nombre: body.nombre,
             correo: body.correo,
             facebook: body.facebook,
+            tipo: body.tipo,
             password: bcrypt.hashSync(password, 10)
         });
     }
@@ -177,6 +179,53 @@ app.put("/usuarios/:id", (req, res) => {
     // grabar el usuario
     // grabar una categoria del listado
 });
+
+
+app.put('/usuarios/password/:idusuario', verificaToken, function(req, res) {
+    let idusuario = req.params.idusuario;
+    let body = req.body;
+
+    Usuario.findOne({ _id: idusuario }, (err, userDB) => {
+        if (err) {
+            return res.status(500).json({
+                ok: false,
+                message: 'Error al buscar Cliente',
+                errors: err
+            });
+        }
+
+        if (!bcrypt.compareSync(body.passwordAnt, userDB.password)) {
+            return res.status(400).json({
+                ok: false,
+                message: 'Contraseñas no coinciden',
+                errors: err
+            });
+        }
+
+        let bodyNew = _.pick(body, ['password']);
+
+        if (bodyNew.password != null) {
+            bodyNew.password = bcrypt.hashSync(bodyNew.password, 10);
+        }
+
+        Usuario.findByIdAndUpdate(idClient, bodyNew, { new: true, runValidators: true }, (err, userDB1) => {
+            if (err) {
+                return res.status(400).json({
+                    ok: false,
+                    err
+                });
+            }
+
+            userDB1.password = null;
+
+            res.json({
+                ok: true,
+                user: userDB1
+            });
+        });
+    });
+});
+
 //=====================================
 //actualizar usuario sin password
 //=====================================

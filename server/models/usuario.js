@@ -17,6 +17,10 @@ let usuarioSchema = new Schema({
         type: String,
         required: false
     },
+    tipo: {
+        type: String,
+        required: [true, 'El tipo de usuario es necesario']
+    },
     facebook: {
         type: Boolean,
         default: false,
