@@ -17,5 +17,7 @@ app.use(require('./pedido'));
 app.use(require('./pedido-detalle'));
 app.use(require('./proveedor'));
 app.use(require('./imagesAdd'));
+app.use(require('./solicitud'));
+app.use(require('./detalleSolicitud'));
 
 module.exports = app;
