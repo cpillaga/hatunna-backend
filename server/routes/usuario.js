@@ -188,7 +188,7 @@ app.put('/usuarios/password/:idusuario', function(req, res) {
         if (err) {
             return res.status(500).json({
                 ok: false,
-                message: 'Error al buscar Cliente',
+                message: 'Error al buscar Usuario',
                 errors: err
             });
         }
@@ -207,7 +207,7 @@ app.put('/usuarios/password/:idusuario', function(req, res) {
             bodyNew.password = bcrypt.hashSync(bodyNew.password, 10);
         }
 
-        Usuario.findByIdAndUpdate(idClient, bodyNew, { new: true, runValidators: true }, (err, userDB1) => {
+        Usuario.findByIdAndUpdate(idClient, bodyNew, { new: true, runValidators: true }, (err, userDB) => {
             if (err) {
                 return res.status(400).json({
                     ok: false,
@@ -215,11 +215,11 @@ app.put('/usuarios/password/:idusuario', function(req, res) {
                 });
             }
 
-            userDB1.password = null;
+            userDB.password = null;
 
             res.json({
                 ok: true,
-                user: userDB1
+                usuario: userDB
             });
         });
     });
