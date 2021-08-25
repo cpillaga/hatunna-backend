@@ -207,7 +207,8 @@ app.put('/usuarios/password/:idusuario', function(req, res) {
             bodyNew.password = bcrypt.hashSync(bodyNew.password, 10);
         }
 
-        Usuario.findByIdAndUpdate(idClient, bodyNew, { new: true, runValidators: true }, (err, userDB) => {
+        Usuario.findByIdAndUpdate(idusuario, bodyNew, { new: true, runValidators: true }, (err, userDB1) => {
+           
             if (err) {
                 return res.status(400).json({
                     ok: false,
@@ -215,11 +216,11 @@ app.put('/usuarios/password/:idusuario', function(req, res) {
                 });
             }
 
-            userDB.password = null;
+            userDB1.password = null;
 
             res.json({
                 ok: true,
-                usuario: userDB
+                usuario: userDB1
             });
         });
     });
