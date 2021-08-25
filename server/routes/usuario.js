@@ -180,7 +180,7 @@ app.put("/usuarios/:id", (req, res) => {
 });
 
 
-app.put('/usuarios/password/:idusuario', verificaToken, function(req, res) {
+app.put('/usuarios/password/:idusuario', function(req, res) {
     let idusuario = req.params.idusuario;
     let body = req.body;
 

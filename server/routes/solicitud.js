@@ -86,7 +86,7 @@ app.post("/solicitud", (req, res) => {
     });
 });
 
-app.put('/solicitud/:id', [verificaToken], function(req, res) {
+app.put('/solicitud/:id', function(req, res) {
     let id = req.params.id;
     let body = req.body;
 
@@ -111,7 +111,7 @@ app.put('/solicitud/:id', [verificaToken], function(req, res) {
 });
 
 
-app.delete('/solicitud/:id/:estado', verificaToken, function(req, res) {
+app.delete('/solicitud/:id/:estado', function(req, res) {
     let id = req.params.id;
     let estado = req.params.estado;
 
