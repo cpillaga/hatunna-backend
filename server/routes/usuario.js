@@ -71,14 +71,13 @@ app.post("/usuarios", (req, res) => {
         usuario = new Usuario({
             nombre: body.nombre,
             correo: body.correo,
-            tipo: body.tipo,
+            tipo:'CLIENTE',
             facebook: body.facebook
         });
     } else {
         usuario = new Usuario({
             nombre: body.nombre,
             correo: body.correo,
-            facebook: body.facebook,
             tipo: body.tipo,
             password: bcrypt.hashSync(password, 10)
         });

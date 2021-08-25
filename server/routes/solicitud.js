@@ -10,11 +10,9 @@ let Solicitud = require("../models/solicitud");
 //=======================================
 //mostrar todos los pedidos por usuario
 //=======================================
-app.get("/solicitud/:id", (req, res) => {
+app.get("/solicitud", (req, res) => {
     let id = req.params.id;
-    Solicitud.find({
-            usuario: id
-        })
+    Solicitud.find()
         .populate('usuario')
         .exec((err, solicitud) => {
             if (err) {
@@ -34,7 +32,7 @@ app.get("/solicitud/:id", (req, res) => {
 //obtener un pedido por id
 //=====================================
 
-app.get("/solicitud/:id", (req, res) => {
+app.get("/solicitud/id/:id", (req, res) => {
     let id = req.params.id;
     Solicitud.findById(id)
         .populate('usuario')
