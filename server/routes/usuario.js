@@ -277,6 +277,45 @@ app.put("/usuarios-sin-password/:id", (req, res) => {
     // grabar una categoria del listado
 });
 
+
+// FIRE BASE TOKENS
+// ADDS
+app.post('/usuarios/fcm/:id', [tokenCheck], (req, res) => {
+    let id = req.params.id;
+    let body = req.body;
+    let fcm = body.fcm;
+
+    Usuario.findById(id, (err, usuarioDB) => {
+        if (err) {
+            return res.status(400).send({
+                statusMessage: 'Bad Request',
+                error: err
+            });
+        }
+        if (!usuarioDB.fcm.includes(fcm)) {
+            usuarioDB.fcm.push(fcm);
+            usuarioDB.save((err, usuarioUpdatedDB) => {
+                if (err) {
+                    return res.status(400).send({
+                        statusMessage: 'Bad Request',
+                        error: err
+                    });
+                }
+                return res.status(200).send({
+                    statusMessage: 'Successful',
+                    message: 'FCM added',
+                    FCM: usuarioUpdatedDB.fcm
+                });
+            });
+        } else {
+            return res.status(409).send({
+                statusMessage: 'Conflict',
+                message: 'FCM already exists'
+            });
+        }
+    });
+});
+
 //=====================================
 //borrar carrito
 //=====================================
