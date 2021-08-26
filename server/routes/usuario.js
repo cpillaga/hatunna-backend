@@ -280,7 +280,7 @@ app.put("/usuarios-sin-password/:id", (req, res) => {
 
 // FIRE BASE TOKENS
 // ADDS
-app.post('/usuarios/fcm/:id', [tokenCheck], (req, res) => {
+app.post('/usuarios/fcm/:id', (req, res) => {
     let id = req.params.id;
     let body = req.body;
     let fcm = body.fcm;
