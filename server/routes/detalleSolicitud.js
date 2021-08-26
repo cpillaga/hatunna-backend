@@ -20,7 +20,7 @@ app.get("/detalleSolicitud/:id", (req, res) => {
                 path: 'categoria'
             }
         })
-        .populate('pedido')
+        .populate('solicitud')
         .exec((err, detalleSolicitud) => {
             if (err) {
                 return res.status(500).json({
