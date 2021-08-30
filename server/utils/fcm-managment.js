@@ -1,7 +1,7 @@
 var admin = require('firebase-admin');
 
 // Load FireBase Credentials
-var userServiceAccount = require('../firebase/shadow-1688d-firebase-adminsdk-cfb0q-204952c041.json');
+var userServiceAccount = require('../firebase/hatunna-pampa-firebase-adminsdk-tdsz5-f04edf7619.json');
 
 // Declare FireBase Apps
 var _userFCM = admin.initializeApp({
