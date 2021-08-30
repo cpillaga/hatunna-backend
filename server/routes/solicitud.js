@@ -6,7 +6,7 @@ let app = express();
 app.use(cors({ origin: '*' }));
 
 let Solicitud = require("../models/solicitud");
-let Usuarios = require("../models/usuario");
+let Usuario = require("../models/usuario");
 
 //=======================================
 //mostrar todos los pedidos por usuario
@@ -105,7 +105,7 @@ app.put('/solicitud/:id', function(req, res) {
         }
 
         console.log(solicitudDB);
-        
+
         Usuario.findOne({ _id: solicitudDB.usuario }).exec((err, usuarioDB) => {
             if (err) {
                 return res.status(500).json({
