@@ -104,6 +104,8 @@ app.put('/solicitud/:id', function(req, res) {
             });
         }
 
+        console.log(solicitudDB);
+        
         Usuario.findOne({ _id: solicitudDB.usuario }).exec((err, usuarioDB) => {
             if (err) {
                 return res.status(500).json({
