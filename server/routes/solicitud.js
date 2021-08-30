@@ -129,7 +129,7 @@ app.put('/solicitud/:id', function(req, res) {
                 mensaje = mensaje + solicitud.estado + " por " + solicitud.comentario;
             }
 
-            fcm.userNotification(usuarioDB.fcm, `Respuesta a Solicitud`, mensaje, { solicitud: solicitudDB, click_action: 'FLUTTER_NOTIFICATION_CLICK' });
+            fcm.userNotification(usuarioDB.fcm, `Respuesta a Solicitud`, mensaje, {});
 
             res.json({
                 ok: true,
