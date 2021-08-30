@@ -104,8 +104,6 @@ app.put('/solicitud/:id', function(req, res) {
             });
         }
 
-        console.log(solicitudDB);
-
         Usuario.findOne({ _id: solicitudDB.usuario }).exec((err, usuarioDB) => {
             if (err) {
                 return res.status(500).json({
@@ -130,7 +128,7 @@ app.put('/solicitud/:id', function(req, res) {
             }else{
                 mensaje = mensaje + solicitud.estado + " por " + solicitud.comentario;
             }
-
+            console.log(usuarioDB.fcm);
             fcm.userNotification(usuarioDB.fcm, `Respuesta a Solicitud`, mensaje, solicitudDB);
 
             res.json({
