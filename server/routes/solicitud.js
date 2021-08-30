@@ -1,11 +1,12 @@
 const express = require("express");
 const mongoose = require('mongoose');
-
+const fcm = require('../utils/fcm-managment');
 const cors = require('cors');
 let app = express();
 app.use(cors({ origin: '*' }));
 
 let Solicitud = require("../models/solicitud");
+let Usuarios = require("../models/usuario");
 
 //=======================================
 //mostrar todos los pedidos por usuario
@@ -91,8 +92,8 @@ app.put('/solicitud/:id', function(req, res) {
     let body = req.body;
 
     let solicitud = {
-        status: body.status,
-        comment: body.comment
+        estado: body.status,
+        comentario: body.comment
     };
 
     Solicitud.findByIdAndUpdate(id, solicitud, { new: true, runValidators: true }, (err, solicitudDB) => {
@@ -103,10 +104,46 @@ app.put('/solicitud/:id', function(req, res) {
             });
         }
 
-        res.json({
-            ok: true,
-            solicitud: solicitudDB
+        Usuario.findOne({ _id: id }).exec((err, usuarioDB) => {
+            if (err) {
+                return res.status(500).json({
+                    ok: false,
+                    err,
+                });
+            }
+
+            if (!usuarioDB) {
+                return res.status(400).json({
+                    ok: false,
+                    err: {
+                        mensaje: "el id no existe",
+                    },
+                });
+            }
+
+            let mensaje = "Su solicitud fue ";
+
+            if (solicitud.estado === 'Aprobado'){
+                mensaje = mensaje + solicitud.estado;
+            }else{
+                mensaje = mensaje + solicitud.estado + " por " + solicitud.comentario;
+            }
+            fcm.userNotification(usuarioDB.fcm, `Respuesta a Solicitud`, mensaje, solicitudDB);
+
+            res.json({
+                ok: true,
+                solicitud: solicitudDB,
+                usuario: usuarioDB,
+            });
+            // res.json({
+            //     ok: true,
+            //     usuario: usuarioDB,
+            // });
         });
+
+       
+
+        
     });
 });
 
