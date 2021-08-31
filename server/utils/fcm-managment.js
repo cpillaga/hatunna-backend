@@ -17,9 +17,10 @@ exports.userNotification = function(tokensList, title, body, data) {
     };
 
     console.log(data);
-    
-    data.__v = "";
 
+    data.__v = "";
+    data.$__ = "";
+    
     var payload = {
         notification: {
             title,
