@@ -16,16 +16,14 @@ exports.userNotification = function(tokensList, title, body, data) {
     //     click_action: 'FLUTTER_NOTIFICATION_CLICK'
     // };
 
-    console.log(body);
-    console.log(data);
 
     var payload = {
         notification: {
             title,
-            body: 'Titulo Notificación',
+            body,
             click_action: 'FLUTTER_NOTIFICATION_CLICK'
         },
-        data: body
+        data
     };
 
     console.log(payload);
