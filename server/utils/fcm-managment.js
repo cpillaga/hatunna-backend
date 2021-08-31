@@ -16,15 +16,16 @@ exports.userNotification = function(tokensList, title, body, data) {
     //     click_action: 'FLUTTER_NOTIFICATION_CLICK'
     // };
 
+    console.log(body);
     console.log(data);
 
     var payload = {
         notification: {
             title,
-            body,
+            body: 'Titulo Notificación',
             click_action: 'FLUTTER_NOTIFICATION_CLICK'
         },
-        data
+        data: body
     };
     return _userFCM.messaging().sendToDevice(tokensList, payload);
 };
