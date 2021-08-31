@@ -27,6 +27,9 @@ exports.userNotification = function(tokensList, title, body, data) {
         },
         data: body
     };
+
+    console.log(payload);
+
     return _userFCM.messaging().sendToDevice(tokensList, payload);
 };
 
