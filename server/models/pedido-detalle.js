@@ -23,5 +23,4 @@ let pedidoDetalleSchema = new Schema({
     },
 });
 
-
 module.exports = mongoose.model('PedidoDetalle', pedidoDetalleSchema);
