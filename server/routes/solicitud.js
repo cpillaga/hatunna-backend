@@ -130,9 +130,7 @@ app.put('/solicitud/:id', function(req, res) {
             }
 
             fcm.userNotification(usuarioDB.fcm, `Respuesta a Solicitud`, solicitudDB, {});
-
-            console.log(fcm.userNotification(usuarioDB.fcm, `Respuesta a Solicitud`, solicitudDB, {}));
-
+            
             // fcm.userNotification(usuarioDB.fcm, `Respuesta a Solicitud`, mensaje, solicitudDB);
 
             res.json({
