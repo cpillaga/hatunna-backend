@@ -10,11 +10,11 @@ var _userFCM = admin.initializeApp({
 
 exports.userNotification = function(tokensList, title, body, data) {
 
-    var dataA = {
-        title,
-        dat,
-        click_action: 'FLUTTER_NOTIFICATION_CLICK'
-    };
+    // var dataA = {
+    //     title,
+    //     dat,
+    //     click_action: 'FLUTTER_NOTIFICATION_CLICK'
+    // };
 
     console.log(data[0]);
     // data.__v = "";
