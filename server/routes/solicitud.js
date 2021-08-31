@@ -129,7 +129,7 @@ app.put('/solicitud/:id', function(req, res) {
                 mensaje = mensaje + solicitud.estado + " por " + solicitud.comentario;
             }
 
-            fcm.userNotification(usuarioDB.fcm, `Respuesta a Solicitud`, mensaje, { id: solicitudDB._id+"" });
+            fcm.userNotification(usuarioDB.fcm, `Respuesta a Solicitud`, mensaje, { id: solicitudDB._id+"", comentario: mensaje, estado: solicitud.estado });
 
             res.json({
                 ok: true,
