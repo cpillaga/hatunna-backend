@@ -16,6 +16,8 @@ exports.userNotification = function(tokensList, title, body, data) {
         click_action: 'FLUTTER_NOTIFICATION_CLICK'
     };
 
+    data.__v = "";
+    
     var payload = {
         notification: {
             title,
