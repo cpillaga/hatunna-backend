@@ -10,6 +10,8 @@ var _userFCM = admin.initializeApp({
 
 exports.userNotification = function(tokensList, title, body, data) {
 
+    data.click_action = 'FLUTTER_NOTIFICATION_CLICK';
+
     var payload = {
         notification: {
             title,
