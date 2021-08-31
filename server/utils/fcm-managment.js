@@ -10,13 +10,6 @@ var _userFCM = admin.initializeApp({
 
 exports.userNotification = function(tokensList, title, body, data) {
 
-    // var dataA = {
-    //     title,
-    //     body,
-    //     data,
-    //     click_action: 'FLUTTER_NOTIFICATION_CLICK'
-    // };
-
     var payload = {
         notification: {
             title,
@@ -26,6 +19,7 @@ exports.userNotification = function(tokensList, title, body, data) {
         data
     };
 
+    console.log(payload);
     return _userFCM.messaging().sendToDevice(tokensList, payload);
 };
 
