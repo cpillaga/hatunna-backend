@@ -10,24 +10,33 @@ var _userFCM = admin.initializeApp({
 
 exports.userNotification = function(tokensList, title, body, data) {
 
+    var dat = {
+        estado: data.estado,
+        comentario: data.comentario,
+        _id: data._id,
+        fecha: data.fecha,
+        subtotal: data.subtotal +"",
+        iva: data.iva +"",
+        total: data.total + "",
+        usuario: data.usuario + "",
+    }
+
     var dataA = {
         title,
-        body: data,
+        body: dat,
         click_action: 'FLUTTER_NOTIFICATION_CLICK'
     };
 
-    console.log(data);
+    // data.__v = "";
+    // data.$__ = "";
 
-    data.__v = "";
-    data.$__ = "";
-    
     var payload = {
         notification: {
             title,
             body,
             click_action: 'FLUTTER_NOTIFICATION_CLICK'
         },
-        data
+        data: dataA
     };
     return _userFCM.messaging().sendToDevice(tokensList, payload);
 };
