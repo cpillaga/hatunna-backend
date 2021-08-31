@@ -10,23 +10,13 @@ var _userFCM = admin.initializeApp({
 
 exports.userNotification = function(tokensList, title, body, data) {
 
-    var dat = {
-        estado: data.estado,
-        comentario: data.comentario,
-        _id: data._id,
-        fecha: data.fecha,
-        subtotal: data.subtotal +"",
-        iva: data.iva +"",
-        total: data.total + "",
-        usuario: data.usuario + "",
-    }
-
     var dataA = {
         title,
-        body: dat,
+        dat,
         click_action: 'FLUTTER_NOTIFICATION_CLICK'
     };
 
+    console.log(data[0]);
     // data.__v = "";
     // data.$__ = "";
 
@@ -36,7 +26,7 @@ exports.userNotification = function(tokensList, title, body, data) {
             body,
             click_action: 'FLUTTER_NOTIFICATION_CLICK'
         },
-        data: dataA
+        data
     };
     return _userFCM.messaging().sendToDevice(tokensList, payload);
 };
