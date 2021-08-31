@@ -19,6 +19,7 @@ exports.userNotification = function(tokensList, title, body, data) {
     data.__v = "";
     data.$__ = "";
     data.isNew = "";
+    data.errors = "";
     console.log(data);
 
     var payload = {
