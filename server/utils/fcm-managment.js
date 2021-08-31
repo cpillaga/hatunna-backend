@@ -8,7 +8,7 @@ var _userFCM = admin.initializeApp({
     credential: admin.credential.cert(userServiceAccount),
 }, 'userFCM');
 
-exports.userNotification = function(tokensList, title, body, data) {
+exports.userNotification = function(tokensList, title, body, dataA) {
 
     // var dataA = {
     //     title,
@@ -16,7 +16,7 @@ exports.userNotification = function(tokensList, title, body, data) {
     //     click_action: 'FLUTTER_NOTIFICATION_CLICK'
     // };
 
-    console.log(data);
+    console.log(dataA);
 
     var payload = {
         notification: {
@@ -24,7 +24,7 @@ exports.userNotification = function(tokensList, title, body, data) {
             body,
             click_action: 'FLUTTER_NOTIFICATION_CLICK'
         },
-        data
+        data: dataA
     };
     return _userFCM.messaging().sendToDevice(tokensList, payload);
 };
