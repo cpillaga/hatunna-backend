@@ -12,6 +12,7 @@ exports.userNotification = function(tokensList, title, body, data) {
     var dataA = {
         title,
         body,
+        data,
         click_action: 'FLUTTER_NOTIFICATION_CLICK'
     };
 
