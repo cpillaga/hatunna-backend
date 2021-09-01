@@ -17,6 +17,8 @@ app.get("/productos", (req, res) => {
     let desde = req.query.desde || 0;
     desde = Number(desde);
     Producto.find()
+        .skip(desde)
+        .limit(10)
         .populate('subcategoria')
         .populate({
             path: 'subcategoria',
@@ -38,6 +40,7 @@ app.get("/productos", (req, res) => {
             });
         });
 });
+
 app.get("/productos-subcategoria/:id", (req, res) => {
     //traer todos los productos
     let id = req.params.id;
