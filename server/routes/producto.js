@@ -16,6 +16,7 @@ app.get("/productos", (req, res) => {
 
     let desde = req.query.desde || 0;
     desde = Number(desde);
+
     Producto.find()
         .skip(desde)
         .limit(10)
@@ -34,10 +35,24 @@ app.get("/productos", (req, res) => {
                     err,
                 });
             }
-            res.json({
-                ok: true,
-                productos,
+
+            Producto.count().exec((err, conteo) => {
+                if (err) {
+                    return res.status(500).json({
+                        ok: false,
+                        err,
+                    });
+                }
+                res.json({
+                    ok: true,
+                    conteo,
+                    productos
+                });
             });
+            // res.json({
+            //     ok: true,
+            //     productos,
+            // });
         });
 });
 
