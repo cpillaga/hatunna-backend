@@ -14,12 +14,11 @@ let Producto = require("../models/producto");
 app.get("/productos", (req, res) => {
     //traer todos los productos
 
-    let desde = req.query.desde || 0;
-    desde = Number(desde);
-
+    // let desde = req.query.desde || 0;
+    // desde = Number(desde);
+// .skip(desde)
+        // .limit(10)
     Producto.find()
-        .skip(desde)
-        .limit(10)
         .populate('subcategoria')
         .populate({
             path: 'subcategoria',
@@ -243,6 +242,12 @@ app.delete("/productos/:id", (req, res) => {
 app.get("/productos/buscar/:termino", (req, res) => {
     let termino = req.params.termino;
     let regex = new RegExp(termino, "i");
+
+    // let desde = req.query.desde || 0;
+    // desde = Number(desde);
+
+        // .skip(desde)
+        // .limit(10)
     Producto.find({
             nombre: regex,
         })
